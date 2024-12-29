@@ -1,0 +1,96 @@
+<!--
+We hereby attest to the truth of the following facts:
+
+We have not discussed the HTML/CSS/Bootstrap/Python/Django language code in our program with anyone other than our instructor or the teaching assistants assigned to this course.
+
+We have not used HTML/CSS/Bootstrap/Python/Django language code obtained from another student, or any other unauthorized source, either modified or unmodified
+
+If any HTML/CSS/Bootstrap/Python/Django language code or docomentation used in our program was obtained from another source, such as a textbook or course notes, that has been clearly noted with a proper citation in the comments of our program.
+
+Bootstrap. (n.d.). Navbar. Bootstrap. https://getbootstrap.com/docs/5.0/components/navbar/.
+Bootstrap. (n.d.). Select. Bootstrap. https://getbootstrap.com/docs/5.0/forms/select/.
+Bootstrap. (n.d.). Spacing. Bootstrap. https://getbootstrap.com/docs/5.0/utilities/spacing/.
+Chapagain, S. (2023, July 6). How to Use a Foreign Key to Create Many-to-One Relationships in Django. Free Code Camp. https://www.freecodecamp.org/news/what-is-one-to-many-relationship-in-django/
+Django. (n.d.). Many-to-one relationships. Django. https://docs.djangoproject.com/en/5.0/topics/db/examples/many_to_one/
+pcoronel. (2014, May 19). Restrict django FloatField to 2 decimal places. Stack Overflow. https://stackoverflow.com/questions/23739030/restrict-django-floatfield-to-2-decimal-places.
+W3Schools. (n.d.). CSS3 Borders. W3Schools. https://www.w3schools.com/css/css3_borders.asp.
+W3Schools. (n.d.). CSS3 Images. W3Schools. https://www.w3schools.com/css/css3_images.asp.
+W3Schools. (n.d.). CSS3 Shadows. W3Schools. https://www.w3schools.com/css/css3_shadows.asp.
+W3Schools. (n.d.). CSS3 Text Justify. W3Schools. https://www.w3schools.com/cssref/css3_pr_text-justify.php.
+W3Schools. (n.d.). CSS Text Spacing. W3Schools. https://www.w3schools.com/css/css_text_spacing.asp.
+W3Schools. (n.d.). HTML <input> placeholder Attribute. W3Schools. https://www.w3schools.com/tags/att_input_placeholder.asp.
+yuvi. (2013, October 28). django difference between - one to one, many to one and many to many. Stack Overflow. https://stackoverflow.com/questions/19641841/django-difference-between-one-to-one-many-to-one-and-many-to-many
+-->
+
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+
+{% block title %}All Tickets{% endblock %}
+
+{% block content %}
+<div class="container col-xxl-8 px-4 pb-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 pt-3 pb-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        {% load static %}
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">Helpdesk Ticketing Solutions</h1>
+        <p class="lead">We help you decide which matters most.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <a href="{% url 'view_all_tickets' %}" type="button" class="btn btn-outline-dark btn-lg px-4">View Tickets</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="px-4 py-5 rounded-3 shadow-sm bg-white bg-gradient mb-2">
+    <div class="row">
+        <div class="col">
+            <h1 class=" col display-6 fw-bold pb-3" id="employeeheader">Tickets</h1>
+        </div>
+        <div class="col">
+            <a href="{% url 'add_ticket' %}" class="col btn  btn-lg btn-dark float-end">+ Create new</a>
+        </div>
+        
+    </div>
+    
+    <table class="table table-striped table-hover border">
+        <thead>
+            <tr class="table-light">
+                <th scope="col" data-field="name"> Employee </th>
+                <th scope="col" data-field="id_number"> ID Number </th>
+                <th scope="col" data-field="issue"> Issue </th>    
+                <th scope="col" data-field="ticket_type"> Type </th>
+                <th scope="col" data-field="severity"> Severity </th>
+                <th scope="col" data-field="daysOpen"> Days Open </th>
+                <th scope="col" data-field="priority"> Priority</th>
+                <th scope="col" data-field="actions"> Actions </th>
+
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.employee.name }}</td>
+                <td>{{ ticket.employee.id_number }}</td>
+                <td>{{ ticket.filedAgainst }}</td>
+                <td>{{ ticket.ticketType }} </td>
+                <td>{{ ticket.severity_level }} </td>
+                <td>{{ ticket.daysOpen }} </td>
+                <td>{{ ticket.priority }}</td>
+                <td>
+                    <div class="container">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start pb-2">
+                            <a href="{% url 'view_ticket' ticket.pk %}" class="btn btn-primary btn-sm w-100">View Details</a>
+                            <a href="{% url 'resolve_ticket' ticket.pk %}" class="btn btn-success btn-sm w-100">Resolve</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

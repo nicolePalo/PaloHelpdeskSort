@@ -1,0 +1,65 @@
+<!--
+We hereby attest to the truth of the following facts:
+
+We have not discussed the HTML/CSS/Bootstrap/Python/Django language code in our program with anyone other than our instructor or the teaching assistants assigned to this course.
+
+We have not used HTML/CSS/Bootstrap/Python/Django language code obtained from another student, or any other unauthorized source, either modified or unmodified
+
+If any HTML/CSS/Bootstrap/Python/Django language code or docomentation used in our program was obtained from another source, such as a textbook or course notes, that has been clearly noted with a proper citation in the comments of our program.
+
+Bootstrap. (n.d.). Navbar. Bootstrap. https://getbootstrap.com/docs/5.0/components/navbar/.
+Bootstrap. (n.d.). Select. Bootstrap. https://getbootstrap.com/docs/5.0/forms/select/.
+Bootstrap. (n.d.). Spacing. Bootstrap. https://getbootstrap.com/docs/5.0/utilities/spacing/.
+Chapagain, S. (2023, July 6). How to Use a Foreign Key to Create Many-to-One Relationships in Django. Free Code Camp. https://www.freecodecamp.org/news/what-is-one-to-many-relationship-in-django/
+Django. (n.d.). Many-to-one relationships. Django. https://docs.djangoproject.com/en/5.0/topics/db/examples/many_to_one/
+pcoronel. (2014, May 19). Restrict django FloatField to 2 decimal places. Stack Overflow. https://stackoverflow.com/questions/23739030/restrict-django-floatfield-to-2-decimal-places.
+W3Schools. (n.d.). CSS3 Borders. W3Schools. https://www.w3schools.com/css/css3_borders.asp.
+W3Schools. (n.d.). CSS3 Images. W3Schools. https://www.w3schools.com/css/css3_images.asp.
+W3Schools. (n.d.). CSS3 Shadows. W3Schools. https://www.w3schools.com/css/css3_shadows.asp.
+W3Schools. (n.d.). CSS3 Text Justify. W3Schools. https://www.w3schools.com/cssref/css3_pr_text-justify.php.
+W3Schools. (n.d.). CSS Text Spacing. W3Schools. https://www.w3schools.com/css/css_text_spacing.asp.
+W3Schools. (n.d.). HTML <input> placeholder Attribute. W3Schools. https://www.w3schools.com/tags/att_input_placeholder.asp.
+yuvi. (2013, October 28). django difference between - one to one, many to one and many to many. Stack Overflow. https://stackoverflow.com/questions/19641841/django-difference-between-one-to-one-many-to-one-and-many-to-many
+-->
+
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}View Ticket{% endblock %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="d-flex justify-content-end mb-4">
+        <a href="{% url 'tickets' %}" class="btn btn-outline-secondary" style="border-color: gray">
+            <i class="bi bi-arrow-left-circle me-2"></i>Back to Tickets
+        </a>
+    </div>
+
+    <div class="card px-5 py-4 rounded-3 shadow-sm border-0">
+        <div class="card-header bg-white border-0">
+            <h1 class="card-title display-6 fw-bold">Ticket for {{ ticket.employee.id_number }}, Priority Level {{ticket.priority}}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-9">
+                    <p class="mb-1"><strong>Name:</strong> {{ ticket.employee.name }}</p>
+                    <p class="mb-0"><strong>Rank:</strong> {{ ticket.employee.seniority }}</p>
+                </div>
+                <div class="col-3 text-end">
+                    <p class="mb-1"><strong>Days Open:</strong> {{ ticket.daysOpen }}</p>
+                    <p class="mb-0"><strong>Ticket ID:</strong> {{ ticket.pk }}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <p class="mb-1"><strong>Nature of concern</strong> {{ ticket.filedAgainst }}</p>
+                    <p class="mb-1"><strong>Ticket Type</strong> {{ ticket.ticketType }}</p>
+                    <p class="mb-1"><strong>Severity Level</strong> {{ ticket.severity_level }}</p>
+                    <p class="mb-1"><strong>Priority</strong> {{ ticket.priority }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
